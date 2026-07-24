@@ -38,53 +38,53 @@ public class ProjectEditor {
         System.out.println("Done editing.");
     }
 
-    public void addRisks(Project p){
+    public void addRisks(Project p) {
         boolean adding = true;
-        int repeat = -1;
-        String riskName;
-        String riskDescription;
-        while(adding){
+    
+        while (adding) {
             System.out.println("Choose a name for this risk: ");
-            riskName = sc.nextLine().trim();
-
+            String riskName = sc.nextLine().trim();
+    
             System.out.println("Write a description for this risk: ");
-            riskDescription = sc.nextLine();
-
-            Risk r = new Risk(riskName,riskDescription);
+            String riskDescription = sc.nextLine();
+    
+            Risk r = new Risk(riskName, riskDescription);
             p.addRisk(r);
-            System.out.println("Risk added. Would you like to add another? \n0) Continue\n1) Return to Main Menu");
-            while(repeat != 1 && repeat != 0) {
+    
+            System.out.println("Risk added. Would you like to add another? \n0) Add another Requirement\n1) Continue");
+    
+            int repeat = -1;
+            while (repeat != 0 && repeat != 1) {
                 try {
                     repeat = sc.nextInt();
                     sc.nextLine(); // consume newline
                 } catch (Exception e) {
                     sc.nextLine(); // clear bad input
+                    repeat = -1;
                 }
-                System.out.println("Please enter a valid number.");
+                if (repeat != 0 && repeat != 1) {
+                    System.out.println("Please enter a valid number (0 or 1).");
+                }
             }
-            switch(repeat) {
-                case 0 -> adding = true;
-                case 1 -> adding = false;
-            }
+    
+            adding = (repeat == 0);
         }
     }
 
 
-    public void addRequirements(Project p){
+
+    public void addRequirements(Project p) {
         boolean adding = true;
-        int repeat = -1;
-        String reqName;
-        String reqDescription;
-        int boolInput = -1;
-        boolean isFunct = false;
-        while(adding){
+    
+        while (adding) {
             System.out.println("Choose a name for this requirement: ");
-            reqName = sc.nextLine().trim();
-
+            String reqName = sc.nextLine().trim();
+    
             System.out.println("Write a description for this requirement: ");
-            reqDescription = sc.nextLine();
-
-            while(boolInput != 1 && boolInput != 0) {
+            String reqDescription = sc.nextLine();
+    
+            int boolInput = -1;
+            while (boolInput != 0 && boolInput != 1) {
                 System.out.println("Is this requirement a functional requirement? \n0) Functional\n1) Nonfunctional");
                 try {
                     boolInput = sc.nextInt();
@@ -92,30 +92,32 @@ public class ProjectEditor {
                 } catch (Exception e) {
                     System.out.println("Please enter a valid number.");
                     sc.nextLine(); // clear bad input
+                    boolInput = -1;
                 }
             }
-            switch(boolInput) {
-                case 0 -> isFunct = true;
-                case 1 -> isFunct = false;
-            }
-            Requirement r = new Requirement(reqName,reqDescription,isFunct);
+    
+            boolean isFunct = (boolInput == 0);
+            Requirement r = new Requirement(reqName, reqDescription, isFunct);
             p.addRequirement(r);
-            System.out.println("Requirement added. Would you like to add another? \n0) Continue\n1) Return to Main Menu");
-            while(repeat != 1 && repeat != 0) {
+    
+            System.out.println("Requirement added. Would you like to add another? \n0) Add another Requirement\n1) Continue");
+    
+            int repeat = -1;
+            while (repeat != 0 && repeat != 1) {
                 try {
                     repeat = sc.nextInt();
                     sc.nextLine(); // consume newline
                 } catch (Exception e) {
                     System.out.println("Please enter a valid number.");
                     sc.nextLine(); // clear bad input
+                    repeat = -1;
                 }
             }
-            switch(repeat) {
-                case 0 -> adding = true;
-                case 1 -> adding = false;
-            }
+    
+            adding = (repeat == 0);
         }
     }
+
 
     public void removeRisks(Project p){
         if(p.getRisks().isEmpty()){

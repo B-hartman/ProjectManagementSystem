@@ -23,6 +23,20 @@ public class Project implements Serializable {
      * @param managerName The name of the project manager if there is one, can be empty
      * @param teamMembers A list of all the team members on the project
      */
+    public Project(String name, String description, String managerName, ArrayList<String> teamMembers, ArrayList<Risk> risks, ArrayList<Requirement> requirements){
+        this.name = name;
+        this.description = description;
+        this.managerName = managerName;
+        this.teamMembers = teamMembers;
+        this.risks = risks;
+        this.requirements = requirements;
+        hoursAnalysis = 0;
+        hoursDesign = 0;
+        hoursCoding = 0;
+        hoursTesting = 0;
+        hoursManagement = 0;
+    } 
+     
     public Project(String name, String description, String managerName, ArrayList<String> teamMembers){
         this.name = name;
         this.description = description;

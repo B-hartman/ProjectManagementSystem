@@ -35,8 +35,25 @@ public class ProjectCreator {
             System.out.print("Team member " + (i + 1) + " name: ");
             teamMembers.add(sc.nextLine().trim());
         }
-
-        return new Project(name, description, managerName, teamMembers);
+        
+        Project projectObject;
+        projectObject = new Project(name, description, managerName, teamMembers);
+        
+        ProjectEditor createrisksandreqs = new ProjectEditor(sc);
+        
+        System.out.print("Do you want to add risks(yes or no): ");
+        String risksChoice = sc.nextLine().trim();
+        if (!risksChoice.isEmpty()) {
+            createrisksandreqs.addRisks(projectObject);
+        }
+        
+        System.out.print("Do you want to add requirements(yes or no): ");
+        String requirementsChoice = sc.nextLine().trim();
+        if (!requirementsChoice.isEmpty()) {
+            createrisksandreqs.addRequirements(projectObject);
+        }   
+        
+        return projectObject;
     }
 
     // Helper to safely read an int from the scanner
